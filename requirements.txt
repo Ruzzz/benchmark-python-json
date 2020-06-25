@@ -1,0 +1,5 @@
+hyperjson
+orjson
+python-rapidjson
+ujson
+tabulate

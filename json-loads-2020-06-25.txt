@@ -1,0 +1,117 @@
+callee        benchmark      elapsed    factor
+------------  -----------  ---------  --------
+ujson         fake-500      0.987628   1
+rapidjson(n)  fake-500      1.10472    1.11856
+rapidjson     fake-500      1.3157     1.33218
+orjson        fake-500      1.42395    1.44179
+hyperjson     fake-500      2.17363    2.20086
+builtin       fake-500      3.18314    3.22302
+
+callee        benchmark      elapsed    factor
+------------  -----------  ---------  --------
+ujson         fake-5000      1.38554   1
+rapidjson(n)  fake-5000      1.5006    1.08304
+orjson        fake-5000      1.50884   1.08898
+rapidjson     fake-5000      1.70108   1.22773
+hyperjson     fake-5000      2.37457   1.71382
+builtin       fake-5000      3.6366    2.62467
+
+callee        benchmark       elapsed    factor
+------------  ------------  ---------  --------
+ujson         fake-1000000    1.84134   1
+rapidjson(n)  fake-1000000    1.97269   1.07133
+orjson        fake-1000000    2.02578   1.10016
+rapidjson     fake-1000000    2.14659   1.16578
+hyperjson     fake-1000000    2.95056   1.6024
+builtin       fake-1000000    4.08516   2.21858
+
+callee        benchmark      elapsed    factor
+------------  -----------  ---------  --------
+orjson        apache.json    1.7357    1
+builtin       apache.json    2.1831    1.25776
+ujson         apache.json    2.1911    1.26237
+rapidjson     apache.json    2.50315   1.44215
+rapidjson(n)  apache.json    2.52986   1.45754
+hyperjson     apache.json    3.00976   1.73403
+
+callee        benchmark      elapsed    factor
+------------  -----------  ---------  --------
+orjson        canada.json    1.55192   1
+rapidjson(n)  canada.json    1.5636    1.00753
+ujson         canada.json    2.04086   1.31505
+hyperjson     canada.json    2.10689   1.3576
+builtin       canada.json    3.83776   2.4729
+rapidjson     canada.json    4.026     2.5942
+
+callee        benchmark      elapsed    factor
+------------  -----------  ---------  --------
+orjson        ctm.json       4.4512    1
+ujson         ctm.json       5.56294   1.24976
+rapidjson(n)  ctm.json       5.95405   1.33763
+rapidjson     ctm.json       6.73293   1.51261
+builtin       ctm.json       6.81802   1.53173
+hyperjson     ctm.json       7.60933   1.7095
+
+callee        benchmark      elapsed    factor
+------------  -----------  ---------  --------
+orjson        github.json    1.34258   1
+ujson         github.json    1.77647   1.32317
+builtin       github.json    1.8282    1.3617
+rapidjson(n)  github.json    1.9332    1.43991
+rapidjson     github.json    2.00837   1.4959
+hyperjson     github.json    2.51979   1.87682
+
+callee        benchmark           elapsed    factor
+------------  ----------------  ---------  --------
+orjson        instruments.json    2.45663   1
+ujson         instruments.json    2.95581   1.2032
+rapidjson(n)  instruments.json    3.38584   1.37825
+builtin       instruments.json    3.88891   1.58302
+rapidjson     instruments.json    4.32157   1.75914
+hyperjson     instruments.json    5.00792   2.03853
+
+callee        benchmark      elapsed    factor
+------------  -----------  ---------  --------
+orjson        mesh.json     0.542835   1
+rapidjson(n)  mesh.json     0.561685   1.03472
+ujson         mesh.json     0.65918    1.21433
+hyperjson     mesh.json     0.867647   1.59836
+builtin       mesh.json     1.09261    2.01279
+rapidjson     mesh.json     1.27572    2.35011
+
+callee        benchmark        elapsed    factor
+------------  -------------  ---------  --------
+ujson         truenull.json   0.222734   1
+orjson        truenull.json   0.237956   1.06834
+rapidjson(n)  truenull.json   0.243235   1.09205
+rapidjson     truenull.json   0.246833   1.1082
+builtin       truenull.json   0.255302   1.14622
+hyperjson     truenull.json   0.490181   2.20075
+
+callee        benchmark      elapsed    factor
+------------  -----------  ---------  --------
+orjson        tweet.json     1.24398   1
+rapidjson(n)  tweet.json     1.63259   1.3124
+ujson         tweet.json     1.63937   1.31784
+rapidjson     tweet.json     1.68221   1.35229
+builtin       tweet.json     1.89664   1.52466
+hyperjson     tweet.json     2.80242   2.25279
+
+callee        benchmark       elapsed    factor
+------------  ------------  ---------  --------
+orjson        twitter.json    2.23238   1
+ujson         twitter.json    2.67633   1.19887
+builtin       twitter.json    3.03452   1.35932
+rapidjson(n)  twitter.json    3.21898   1.44195
+rapidjson     twitter.json    3.36185   1.50595
+hyperjson     twitter.json    4.41956   1.97975
+
+callee           mean    median
+------------  -------  --------
+orjson        1.05827   1
+ujson         1.17372   1.20876
+rapidjson(n)  1.23124   1.21548
+rapidjson     1.57052   1.46902
+builtin       1.8597    1.55737
+hyperjson     1.85543   1.80542
+
