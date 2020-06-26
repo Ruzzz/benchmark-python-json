@@ -7,7 +7,7 @@ from itertools import chain
 from pathlib import Path
 from sys import getsizeof
 from time import gmtime, strftime
-from typing import Tuple, Iterable, Any, NamedTuple, List, Generator
+from typing import Any, Generator, Iterable, List, NamedTuple, Tuple, Dict
 
 import hyperjson  # https://github.com/mre/hyperjson
 import orjson  # https://github.com/ijl/orjson
@@ -24,52 +24,52 @@ COUNT_FACTOR = 1
 ROOT_PATH = Path(__file__).resolve().parents[1]
 
 
-def _fname_ts() -> str:
-    return strftime('%Y-%m-%d', gmtime())
-
-
 class InData(NamedTuple):
-    name: str
+    name: str  # name of data (data grouped benchmarks name)
     data: Any
-    count: int
+    count_of_call: int
 
 
-class Result(AutoPropertiesDict):
+class ReportItem(AutoPropertiesDict):
     callee: str
-    benchmark: str
     elapsed: float
-    factor: float
+    ratio: float
 
 
-GroupedResult = List[List[Result]]
-Callee = Tuple[str, callable]
+class SummaryItem(AutoPropertiesDict):
+    callee: str
+    mean: float
+    median: float
+
+
+Callee = Tuple[str, callable]  # name of researched object, as well as this object itself
+Report = Dict[str, List[ReportItem]]  # name of data
+Summary = List[SummaryItem]
 
 
 def benchmark(callees: Iterable[Callee],
-              data: Iterable[InData],
-              verbose=True) -> GroupedResult:
-    ret = []
-    for benchmark_name, benchmark_data, benchmark_count in data:
-        benchmark_count = round(benchmark_count * COUNT_FACTOR)
+              dataset: Iterable[InData],
+              verbose=True) -> Report:
+    ret = {}
+    for data_name, data, count_of_call in dataset:
+        count_of_call = round(count_of_call * COUNT_FACTOR)
         if verbose:
-            print(benchmark_name, 'count:', benchmark_count, 'size:', getsizeof(benchmark_data))
+            print(data_name, 'count of call:', count_of_call, 'size of data:', getsizeof(data))
 
-        if benchmark_count <= 0:
+        if count_of_call <= 0:
             continue
-        callees_group = []
+        group = []
         for callee_name, callee in callees:
             if verbose:
                 print(' -', callee_name)
 
             with Elapsed() as elapsed:
-                for _ in range(benchmark_count):
-                    callee(benchmark_data)
-            callees_group.append(Result(
-                callee=callee_name,
-                benchmark=benchmark_name,
-                elapsed=elapsed()
-            ))
-        ret.append(callees_group)
+                for _ in range(count_of_call):
+                    callee(data)
+            group.append(ReportItem(callee=callee_name, elapsed=elapsed()))
+
+        group.sort(key=lambda x: x.elapsed)
+        ret[data_name] = group
 
     if verbose:
         print()
@@ -78,59 +78,83 @@ def benchmark(callees: Iterable[Callee],
 
 def generate_fake_data(as_string=False) -> Generator[InData, None, None]:
     json_generator = FakeJsonGenerator(JsonTypeWeights(string_weight=2, number_weight=2))
-    for size, count in [(500, 200000),
-                        (5000, 20000),
-                        (1000000, 100)]:
+    values = [
+        (512, 200000, '512b'),
+        (5 * 1024, 20000, '5kb'),
+        (1024 * 1024, 100, '1mb')
+    ]
+    for size, count, name in values:
         data = json_generator(size)
         if as_string:
             data = json.dumps(data)
-        yield InData(name=f'fake-{size}', data=data, count=count)
+        yield InData(name=f'fake-{name}.json', data=data, count_of_call=count)
 
 
 def load_data(as_string=False) -> Generator[InData, None, None]:
-    for fname, count in [('./data/apache.json', 5000),
-                         ('./data/canada.json', 100),
-                         ('./data/ctm.json', 800),
-                         ('./data/github.json', 8000),
-                         ('./data/instruments.json', 4000),
-                         ('./data/mesh.json', 200),
-                         ('./data/truenull.json', 10000),
-                         ('./data/tweet.json', 100000),
-                         ('./data/twitter.json', 1000)]:
+    values = [
+        ('data/apache.json', 5000),
+        ('data/canada.json', 100),
+        ('data/ctm.json', 800),
+        ('data/github.json', 8000),
+        ('data/instruments.json', 4000),
+        ('data/mesh.json', 200),
+        ('data/truenull.json', 10000),
+        ('data/tweet.json', 100000),
+        ('data/twitter.json', 1000)
+    ]
+    for fname, count in values:
         fname = ROOT_PATH / fname
         with open(fname) as f:
             data = f.read()
             if not as_string:
                 data = json.loads(data)
-        yield InData(name=fname.name, data=data, count=count)
+        yield InData(name=fname.name, data=data, count_of_call=count)
 
 
-def report_benchmark(result: GroupedResult, fname):
-    report = ''
-    total_factors = defaultdict(list)
-
-    for group in result:
+def calc_summary(report: Report) -> Summary:
+    ratios = defaultdict(list)
+    for _, group in report.items():
         group.sort(key=lambda x: x.elapsed)
         first = group[0]
         for item in group:
-            item.factor = item.elapsed / first.elapsed
-            total_factors[item.callee].append(item.factor)
+            item.ratio = item.elapsed / first.elapsed
+            ratios[item.callee].append(item.ratio)
 
-        report += tabulate(group, headers='keys')
-        report += '\n\n'
+    ret = []
+    for callee, ratios in ratios.items():
+        ret.append(SummaryItem(
+            callee=callee,
+            mean=statistics.mean(ratios),
+            median=statistics.median(ratios)
+        ))
+    ret.sort(key=lambda x: x.median)
+    return ret
 
-    total_info = []
-    for callee, factors in total_factors.items():
-        total_info.append({
-            'callee': callee,
-            'mean': statistics.mean(factors),
-            'median': statistics.median(factors),
-        })
-    total_info.sort(key=lambda x: x['median'])
-    report += tabulate(total_info, headers='keys')
-    report += '\n\n'
+
+def report_as_table(report: Report, summary: Summary, fname, title):
+    content = f'## {title}\n\n'
+    for data_name, group in report.items():
+        content += f'### {data_name}\n\n'
+        content += tabulate(group, headers='keys', tablefmt='pipe')
+        content += '\n\n'
+
+    content += '### Summary\n\n'
+    content += tabulate(summary, headers='keys', tablefmt='pipe')
+    content += '\n\n'
+
+    Path(fname).parent.mkdir(parents=True, exist_ok=True)
     with open(fname, 'w') as f:
-        f.write(report)
+        f.write(content)
+
+
+def report_as_json(report: Report, summary: Summary, fname):
+    content = {
+        'report': report,
+        'summary': summary,
+    }
+    Path(fname).parent.mkdir(parents=True, exist_ok=True)
+    with open(fname, 'w') as f:
+        f.write(json.dumps(content))
 
 
 def benchmark_dumps():
@@ -142,9 +166,12 @@ def benchmark_dumps():
         ('hyperjson', hyperjson.dumps),
         ('ujson', ujson.dumps),
     ]
-    data = chain(generate_fake_data(), load_data())
-    result = benchmark(callees, data)
-    report_benchmark(result, ROOT_PATH / f'json-dumps-{_fname_ts()}.txt')
+    dataset = chain(generate_fake_data(), load_data())
+    report = benchmark(callees, dataset)
+    summary = calc_summary(report)
+    now = strftime('%Y-%m-%d', gmtime())
+    report_as_table(report, summary, ROOT_PATH / f'reports/json-dumps-{now}.md', 'JSON dumps')
+    report_as_json(report, summary, ROOT_PATH / f'reports/json-dumps-{now}.json')
 
 
 def benchmark_loads():
@@ -156,9 +183,12 @@ def benchmark_loads():
         ('hyperjson', hyperjson.loads),
         ('ujson', ujson.loads),
     ]
-    data = chain(generate_fake_data(True), load_data(True))
-    result = benchmark(callees, data)
-    report_benchmark(result, ROOT_PATH / f'json-loads-{_fname_ts()}.txt')
+    dataset = chain(generate_fake_data(True), load_data(True))
+    report = benchmark(callees, dataset)
+    summary = calc_summary(report)
+    now = strftime('%Y-%m-%d', gmtime())
+    report_as_table(report, summary, ROOT_PATH / f'reports/json-loads-{now}.md', 'JSON loads')
+    report_as_json(report, summary, ROOT_PATH / f'reports/json-loads-{now}.json')
 
 
 def main():
