@@ -4,320 +4,320 @@
 
 ### fake-512b.json
 
-| callee       |   elapsed |   ratio |
-|:-------------|----------:|--------:|
-| orjson       |  0.499733 | 1       |
-| ujson        |  0.956588 | 1.9142  |
-| rapidjson    |  1.27801  | 2.55739 |
-| rapidjson(n) |  1.27924  | 2.55984 |
-| hyperjson    |  1.48591  | 2.9734  |
-| builtin      |  1.75281  | 3.50749 |
+| callee_name   |   elapsed |   ratio |
+|:--------------|----------:|--------:|
+| orjson        |  0.473276 | 1       |
+| ujson         |  0.879569 | 1.85847 |
+| hyperjson     |  1.39849  | 2.95492 |
+| rapidjson     |  1.86071  | 3.93155 |
+| rapidjson(n)  |  1.89898  | 4.01241 |
+| builtin       |  2.25303  | 4.76049 |
 
 ### fake-5kb.json
 
-| callee       |   elapsed |   ratio |
-|:-------------|----------:|--------:|
-| orjson       |  0.406524 | 1       |
-| ujson        |  0.754678 | 1.85642 |
-| hyperjson    |  0.996872 | 2.45218 |
-| rapidjson(n) |  1.24306  | 3.05778 |
-| rapidjson    |  1.27708  | 3.14146 |
-| builtin      |  1.37305  | 3.37754 |
+| callee_name   |   elapsed |   ratio |
+|:--------------|----------:|--------:|
+| orjson        |  0.404353 | 1       |
+| ujson         |  0.800402 | 1.97946 |
+| hyperjson     |  1.08275  | 2.67774 |
+| rapidjson(n)  |  1.29006  | 3.19042 |
+| rapidjson     |  1.30772  | 3.23411 |
+| builtin       |  1.58975  | 3.93159 |
 
 ### fake-1mb.json
 
-| callee       |   elapsed |   ratio |
-|:-------------|----------:|--------:|
-| orjson       |  0.554202 | 1       |
-| ujson        |  0.968093 | 1.74682 |
-| hyperjson    |  1.42418  | 2.56979 |
-| rapidjson(n) |  1.58954  | 2.86816 |
-| rapidjson    |  1.63238  | 2.94546 |
-| builtin      |  2.33727  | 4.21736 |
+| callee_name   |   elapsed |   ratio |
+|:--------------|----------:|--------:|
+| orjson        |  0.55777  | 1       |
+| ujson         |  0.989831 | 1.77462 |
+| hyperjson     |  1.25669  | 2.25306 |
+| rapidjson(n)  |  1.62855  | 2.91974 |
+| rapidjson     |  1.6556   | 2.96825 |
+| builtin       |  2.35696  | 4.22568 |
 
 ### apache.json
 
-| callee       |   elapsed |   ratio |
-|:-------------|----------:|--------:|
-| orjson       |  0.629915 | 1       |
-| hyperjson    |  1.82538  | 2.89782 |
-| ujson        |  1.85414  | 2.94348 |
-| rapidjson    |  1.88337  | 2.98988 |
-| rapidjson(n) |  1.88525  | 2.99287 |
-| builtin      |  2.94369  | 4.67316 |
+| callee_name   |   elapsed |   ratio |
+|:--------------|----------:|--------:|
+| orjson        |  0.643859 | 1       |
+| rapidjson     |  1.88414  | 2.92632 |
+| rapidjson(n)  |  1.88739  | 2.93138 |
+| ujson         |  1.91712  | 2.97754 |
+| hyperjson     |  1.94463  | 3.02027 |
+| builtin       |  2.9655   | 4.60582 |
 
 ### canada.json
 
-| callee       |   elapsed |    ratio |
-|:-------------|----------:|---------:|
-| orjson       |  0.495562 |  1       |
-| hyperjson    |  0.997357 |  2.01258 |
-| ujson        |  1.69461  |  3.41958 |
-| rapidjson(n) |  5.47749  | 11.0531  |
-| rapidjson    |  5.49845  | 11.0954  |
-| builtin      |  5.63927  | 11.3795  |
+| callee_name   |   elapsed |    ratio |
+|:--------------|----------:|---------:|
+| orjson        |  0.527664 |  1       |
+| hyperjson     |  0.997849 |  1.89107 |
+| ujson         |  1.70171  |  3.22498 |
+| rapidjson     |  5.48297  | 10.391   |
+| rapidjson(n)  |  5.54573  | 10.51    |
+| builtin       |  5.67545  | 10.7558  |
 
 ### ctm.json
 
-| callee       |   elapsed |   ratio |
-|:-------------|----------:|--------:|
-| orjson       |  0.992005 | 1       |
-| rapidjson(n) |  1.74665  | 1.76073 |
-| rapidjson    |  2.18218  | 2.19977 |
-| ujson        |  2.30588  | 2.32446 |
-| hyperjson    |  3.11334  | 3.13843 |
-| builtin      |  4.22117  | 4.25519 |
+| callee_name   |   elapsed |   ratio |
+|:--------------|----------:|--------:|
+| orjson        |   0.9988  | 1       |
+| rapidjson(n)  |   1.74767 | 1.74976 |
+| rapidjson     |   2.21141 | 2.21406 |
+| ujson         |   2.315   | 2.31778 |
+| hyperjson     |   3.10726 | 3.11099 |
+| builtin       |   4.29246 | 4.29761 |
 
 ### github.json
 
-| callee       |   elapsed |   ratio |
-|:-------------|----------:|--------:|
-| orjson       |  0.570192 | 1       |
-| hyperjson    |  1.3892   | 2.43637 |
-| ujson        |  1.39381  | 2.44446 |
-| rapidjson(n) |  1.58935  | 2.78739 |
-| rapidjson    |  1.62478  | 2.84953 |
-| builtin      |  2.18464  | 3.83141 |
+| callee_name   |   elapsed |   ratio |
+|:--------------|----------:|--------:|
+| orjson        |  0.566375 | 1       |
+| ujson         |  1.40717  | 2.48451 |
+| hyperjson     |  1.45163  | 2.56301 |
+| rapidjson(n)  |  1.59111  | 2.80929 |
+| rapidjson     |  1.62674  | 2.87219 |
+| builtin       |  2.19684  | 3.87877 |
 
 ### instruments.json
 
-| callee       |   elapsed |   ratio |
-|:-------------|----------:|--------:|
-| orjson       |  0.786712 | 1       |
-| rapidjson(n) |  2.01107  | 2.55629 |
-| ujson        |  2.32475  | 2.95502 |
-| rapidjson    |  2.45303  | 3.11808 |
-| hyperjson    |  3.47484  | 4.41692 |
-| builtin      |  4.01021  | 5.09743 |
+| callee_name   |   elapsed |   ratio |
+|:--------------|----------:|--------:|
+| orjson        |  0.814104 | 1       |
+| rapidjson(n)  |  2.05214  | 2.52073 |
+| ujson         |  2.34315  | 2.8782  |
+| rapidjson     |  2.49675  | 3.06686 |
+| hyperjson     |  3.59825  | 4.41989 |
+| builtin       |  4.04319  | 4.96643 |
 
 ### mesh.json
 
-| callee       |   elapsed |   ratio |
-|:-------------|----------:|--------:|
-| orjson       |  0.455774 | 1       |
-| ujson        |  0.955233 | 2.09585 |
-| hyperjson    |  1.08532  | 2.38126 |
-| rapidjson(n) |  2.65283  | 5.82049 |
-| rapidjson    |  2.86774  | 6.29202 |
-| builtin      |  2.9505   | 6.4736  |
+| callee_name   |   elapsed |   ratio |
+|:--------------|----------:|--------:|
+| orjson        |  0.43776  | 1       |
+| ujson         |  0.982093 | 2.24345 |
+| hyperjson     |  1.04956  | 2.39757 |
+| rapidjson(n)  |  2.60379  | 5.94799 |
+| rapidjson     |  2.85918  | 6.5314  |
+| builtin       |  2.93982  | 6.7156  |
 
 ### truenull.json
 
-| callee       |   elapsed |    ratio |
-|:-------------|----------:|---------:|
-| orjson       |  0.148107 |  1       |
-| rapidjson    |  0.31453  |  2.12367 |
-| rapidjson(n) |  0.320403 |  2.16333 |
-| builtin      |  0.491474 |  3.31838 |
-| ujson        |  0.547112 |  3.69404 |
-| hyperjson    |  3.21812  | 21.7284  |
+| callee_name   |   elapsed |    ratio |
+|:--------------|----------:|---------:|
+| orjson        |  0.14982  |  1       |
+| rapidjson     |  0.314163 |  2.09693 |
+| rapidjson(n)  |  0.317222 |  2.11735 |
+| builtin       |  0.484453 |  3.23356 |
+| ujson         |  0.538865 |  3.59674 |
+| hyperjson     |  3.18511  | 21.2595  |
 
 ### tweet.json
 
-| callee       |   elapsed |   ratio |
-|:-------------|----------:|--------:|
-| orjson       |  0.502274 | 1       |
-| ujson        |  1.41528  | 2.81775 |
-| rapidjson(n) |  1.50031  | 2.98704 |
-| rapidjson    |  1.50912  | 3.00458 |
-| builtin      |  2.19348  | 4.3671  |
-| hyperjson    |  2.35034  | 4.67939 |
+| callee_name   |   elapsed |   ratio |
+|:--------------|----------:|--------:|
+| orjson        |  0.501781 | 1       |
+| ujson         |  1.42425  | 2.83839 |
+| rapidjson(n)  |  1.48957  | 2.96856 |
+| rapidjson     |  1.5136   | 3.01646 |
+| builtin       |  2.19983  | 4.38404 |
+| hyperjson     |  2.36858  | 4.72034 |
 
 ### twitter.json
 
-| callee       |   elapsed |   ratio |
-|:-------------|----------:|--------:|
-| orjson       |  0.772852 | 1       |
-| ujson        |  1.67792  | 2.17108 |
-| rapidjson(n) |  1.82739  | 2.36448 |
-| rapidjson    |  1.90073  | 2.45936 |
-| hyperjson    |  2.51035  | 3.24816 |
-| builtin      |  2.59461  | 3.35718 |
+| callee_name   |   elapsed |   ratio |
+|:--------------|----------:|--------:|
+| orjson        |  0.783495 | 1       |
+| ujson         |  1.73375  | 2.21283 |
+| rapidjson(n)  |  1.89307  | 2.41618 |
+| rapidjson     |  1.95661  | 2.49729 |
+| hyperjson     |  2.59704  | 3.31469 |
+| builtin       |  2.63347  | 3.36118 |
 
 ### Summary
 
-| callee       |    mean |   median |
-|:-------------|--------:|---------:|
-| orjson       | 1       |  1       |
-| ujson        | 2.53193 |  2.38446 |
-| rapidjson(n) | 3.58096 |  2.82777 |
-| hyperjson    | 4.57789 |  2.93561 |
-| rapidjson    | 3.73138 |  2.96767 |
-| builtin      | 4.82128 |  4.23628 |
+| callee_name   |    mean |   median |
+|:--------------|--------:|---------:|
+| orjson        | 1       |  1       |
+| ujson         | 2.53225 |  2.40115 |
+| rapidjson(n)  | 3.67448 |  2.92556 |
+| hyperjson     | 4.54859 |  2.98759 |
+| rapidjson     | 3.8122  |  2.99236 |
+| builtin       | 4.92638 |  4.34083 |
 
 ## JSON loads
 
 ### fake-512b.json
 
-| callee       |   elapsed |   ratio |
-|:-------------|----------:|--------:|
-| ujson        |   1.07366 | 1       |
-| rapidjson(n) |   1.17244 | 1.092   |
-| rapidjson    |   1.22949 | 1.14514 |
-| orjson       |   1.53646 | 1.43104 |
-| hyperjson    |   2.36333 | 2.20119 |
-| builtin      |   3.36872 | 3.1376  |
+| callee_name   |   elapsed |   ratio |
+|:--------------|----------:|--------:|
+| ujson         |  0.804319 | 1       |
+| rapidjson(n)  |  0.981083 | 1.21977 |
+| rapidjson     |  1.05281  | 1.30895 |
+| orjson        |  1.40376  | 1.74528 |
+| hyperjson     |  1.97686  | 2.4578  |
+| builtin       |  3.47531  | 4.32081 |
 
 ### fake-5kb.json
 
-| callee       |   elapsed |   ratio |
-|:-------------|----------:|--------:|
-| ujson        |   1.49669 | 1       |
-| rapidjson(n) |   1.64586 | 1.09966 |
-| orjson       |   1.68428 | 1.12534 |
-| rapidjson    |   1.84215 | 1.23081 |
-| hyperjson    |   2.62557 | 1.75425 |
-| builtin      |   3.79367 | 2.5347  |
+| callee_name   |   elapsed |   ratio |
+|:--------------|----------:|--------:|
+| ujson         |   1.50261 | 1       |
+| rapidjson(n)  |   1.6032  | 1.06694 |
+| orjson        |   1.63428 | 1.08762 |
+| rapidjson     |   1.7928  | 1.19312 |
+| hyperjson     |   2.36933 | 1.57681 |
+| builtin       |   4.38159 | 2.91598 |
 
 ### fake-1mb.json
 
-| callee       |   elapsed |   ratio |
-|:-------------|----------:|--------:|
-| ujson        |   1.98813 | 1       |
-| rapidjson(n) |   2.17079 | 1.09187 |
-| orjson       |   2.21765 | 1.11544 |
-| rapidjson    |   2.33399 | 1.17396 |
-| hyperjson    |   3.20157 | 1.61034 |
-| builtin      |   4.31349 | 2.16962 |
+| callee_name   |   elapsed |   ratio |
+|:--------------|----------:|--------:|
+| ujson         |   1.95164 | 1       |
+| rapidjson(n)  |   2.04021 | 1.04538 |
+| orjson        |   2.12726 | 1.08999 |
+| rapidjson     |   2.27856 | 1.16751 |
+| hyperjson     |   3.12168 | 1.59952 |
+| builtin       |   4.58189 | 2.34772 |
 
 ### apache.json
 
-| callee       |   elapsed |   ratio |
-|:-------------|----------:|--------:|
-| orjson       |   1.73378 | 1       |
-| builtin      |   2.21708 | 1.27875 |
-| ujson        |   2.25927 | 1.30309 |
-| rapidjson    |   2.56814 | 1.48124 |
-| rapidjson(n) |   2.5997  | 1.49944 |
-| hyperjson    |   3.0831  | 1.77825 |
+| callee_name   |   elapsed |   ratio |
+|:--------------|----------:|--------:|
+| orjson        |   1.73101 | 1       |
+| builtin       |   2.13914 | 1.23578 |
+| ujson         |   2.2302  | 1.28838 |
+| rapidjson(n)  |   2.54066 | 1.46773 |
+| rapidjson     |   2.62743 | 1.51786 |
+| hyperjson     |   3.10076 | 1.7913  |
 
 ### canada.json
 
-| callee       |   elapsed |   ratio |
-|:-------------|----------:|--------:|
-| orjson       |   1.62322 | 1       |
-| rapidjson(n) |   1.62744 | 1.0026  |
-| ujson        |   2.08461 | 1.28424 |
-| hyperjson    |   2.14488 | 1.32137 |
-| builtin      |   3.93968 | 2.42707 |
-| rapidjson    |   4.1002  | 2.52596 |
+| callee_name   |   elapsed |   ratio |
+|:--------------|----------:|--------:|
+| rapidjson(n)  |   1.52759 | 1       |
+| orjson        |   1.5634  | 1.02344 |
+| ujson         |   2.0459  | 1.33929 |
+| hyperjson     |   2.10509 | 1.37804 |
+| builtin       |   3.89265 | 2.54822 |
+| rapidjson     |   4.03046 | 2.63844 |
 
 ### ctm.json
 
-| callee       |   elapsed |   ratio |
-|:-------------|----------:|--------:|
-| orjson       |   4.57388 | 1       |
-| ujson        |   5.87768 | 1.28505 |
-| rapidjson(n) |   6.17932 | 1.351   |
-| rapidjson    |   6.92899 | 1.5149  |
-| builtin      |   7.02196 | 1.53523 |
-| hyperjson    |   8.05174 | 1.76037 |
+| callee_name   |   elapsed |   ratio |
+|:--------------|----------:|--------:|
+| orjson        |   4.61497 | 1       |
+| ujson         |   5.57674 | 1.2084  |
+| rapidjson(n)  |   5.96386 | 1.29228 |
+| rapidjson     |   6.87359 | 1.48941 |
+| builtin       |   7.17646 | 1.55504 |
+| hyperjson     |   7.88272 | 1.70807 |
 
 ### github.json
 
-| callee       |   elapsed |   ratio |
-|:-------------|----------:|--------:|
-| orjson       |   1.34867 | 1       |
-| ujson        |   1.75791 | 1.30343 |
-| builtin      |   1.84029 | 1.36452 |
-| rapidjson(n) |   1.92355 | 1.42625 |
-| rapidjson    |   1.98188 | 1.4695  |
-| hyperjson    |   2.48691 | 1.84396 |
+| callee_name   |   elapsed |   ratio |
+|:--------------|----------:|--------:|
+| orjson        |   1.33526 | 1       |
+| ujson         |   1.81755 | 1.36119 |
+| builtin       |   1.86248 | 1.39484 |
+| rapidjson(n)  |   1.95643 | 1.46521 |
+| rapidjson     |   2.02601 | 1.51732 |
+| hyperjson     |   2.60756 | 1.95285 |
 
 ### instruments.json
 
-| callee       |   elapsed |   ratio |
-|:-------------|----------:|--------:|
-| orjson       |   2.30303 | 1       |
-| ujson        |   3.10792 | 1.34949 |
-| rapidjson(n) |   3.32241 | 1.44262 |
-| builtin      |   3.902   | 1.69429 |
-| rapidjson    |   4.26696 | 1.85276 |
-| hyperjson    |   5.21585 | 2.26477 |
+| callee_name   |   elapsed |   ratio |
+|:--------------|----------:|--------:|
+| orjson        |   2.43005 | 1       |
+| ujson         |   2.94963 | 1.21381 |
+| rapidjson(n)  |   3.37076 | 1.38712 |
+| builtin       |   4.01915 | 1.65394 |
+| rapidjson     |   4.36644 | 1.79685 |
+| hyperjson     |   5.26694 | 2.16742 |
 
 ### mesh.json
 
-| callee       |   elapsed |   ratio |
-|:-------------|----------:|--------:|
-| orjson       |  0.563903 | 1       |
-| rapidjson(n) |  0.626535 | 1.11107 |
-| ujson        |  0.700556 | 1.24233 |
-| hyperjson    |  0.960004 | 1.70243 |
-| builtin      |  1.1074   | 1.96382 |
-| rapidjson    |  1.41312  | 2.50597 |
+| callee_name   |   elapsed |   ratio |
+|:--------------|----------:|--------:|
+| orjson        |  0.541251 | 1       |
+| rapidjson(n)  |  0.55749  | 1.03    |
+| ujson         |  0.661779 | 1.22268 |
+| hyperjson     |  0.871127 | 1.60947 |
+| builtin       |  1.0874   | 2.00905 |
+| rapidjson     |  1.30779  | 2.41623 |
 
 ### truenull.json
 
-| callee       |   elapsed |   ratio |
-|:-------------|----------:|--------:|
-| ujson        |  0.224341 | 1       |
-| orjson       |  0.244418 | 1.08949 |
-| rapidjson    |  0.249284 | 1.11118 |
-| rapidjson(n) |  0.254347 | 1.13375 |
-| builtin      |  0.261114 | 1.16391 |
-| hyperjson    |  0.492331 | 2.19457 |
+| callee_name   |   elapsed |   ratio |
+|:--------------|----------:|--------:|
+| ujson         |  0.225518 | 1       |
+| orjson        |  0.238425 | 1.05723 |
+| rapidjson(n)  |  0.247323 | 1.09668 |
+| rapidjson     |  0.250948 | 1.11276 |
+| builtin       |  0.257093 | 1.14001 |
+| hyperjson     |  0.495177 | 2.19573 |
 
 ### tweet.json
 
-| callee       |   elapsed |   ratio |
-|:-------------|----------:|--------:|
-| orjson       |   1.22825 | 1       |
-| ujson        |   1.59926 | 1.30206 |
-| rapidjson(n) |   1.62635 | 1.32412 |
-| rapidjson    |   1.73822 | 1.4152  |
-| builtin      |   1.94302 | 1.58194 |
-| hyperjson    |   2.86946 | 2.33622 |
+| callee_name   |   elapsed |   ratio |
+|:--------------|----------:|--------:|
+| orjson        |   1.27525 | 1       |
+| ujson         |   1.61155 | 1.26371 |
+| rapidjson(n)  |   1.61898 | 1.26954 |
+| rapidjson     |   1.70108 | 1.33392 |
+| builtin       |   1.85939 | 1.45807 |
+| hyperjson     |   2.86963 | 2.25026 |
 
 ### twitter.json
 
-| callee       |   elapsed |   ratio |
-|:-------------|----------:|--------:|
-| orjson       |   2.22697 | 1       |
-| ujson        |   2.656   | 1.19265 |
-| builtin      |   3.04015 | 1.36515 |
-| rapidjson(n) |   3.21547 | 1.44388 |
-| rapidjson    |   3.59227 | 1.61308 |
-| hyperjson    |   4.48714 | 2.01491 |
+| callee_name   |   elapsed |   ratio |
+|:--------------|----------:|--------:|
+| orjson        |   2.31976 | 1       |
+| ujson         |   2.72414 | 1.17432 |
+| builtin       |   3.20882 | 1.38325 |
+| rapidjson(n)  |   3.22017 | 1.38815 |
+| rapidjson     |   3.4342  | 1.48041 |
+| hyperjson     |   4.56345 | 1.96721 |
 
 ### Summary
 
-| callee       |    mean |   median |
-|:-------------|--------:|---------:|
-| orjson       | 1.06344 |  1       |
-| rapidjson(n) | 1.25152 |  1.22893 |
-| ujson        | 1.18853 |  1.26329 |
-| rapidjson    | 1.58664 |  1.47537 |
-| builtin      | 1.85138 |  1.63811 |
-| hyperjson    | 1.89855 |  1.81111 |
+| callee_name   |    mean |   median |
+|:--------------|--------:|---------:|
+| orjson        | 1.08363 |  1       |
+| ujson         | 1.17265 |  1.21111 |
+| rapidjson(n)  | 1.2274  |  1.24466 |
+| rapidjson     | 1.58107 |  1.48491 |
+| builtin       | 1.99689 |  1.60449 |
+| hyperjson     | 1.88787 |  1.87207 |
 
 # Charts
 
 ## JSON dumps
 
-![fake-512b.json](reports/charts/dumps-fake-512b.json.png)
-![fake-5kb.json](reports/charts/dumps-fake-5kb.json.png)
-![fake-1mb.json](reports/charts/dumps-fake-1mb.json.png)
-![apache.json](reports/charts/dumps-apache.json.png)
-![canada.json](reports/charts/dumps-canada.json.png)
-![ctm.json](reports/charts/dumps-ctm.json.png)
-![github.json](reports/charts/dumps-github.json.png)
-![instruments.json](reports/charts/dumps-instruments.json.png)
-![mesh.json](reports/charts/dumps-mesh.json.png)
-![truenull.json](reports/charts/dumps-truenull.json.png)
-![tweet.json](reports/charts/dumps-tweet.json.png)
-![twitter.json](reports/charts/dumps-twitter.json.png)
+![dumps | fake-512b.json](reports/charts/json-dumps-fake-512b.json.png)
+![dumps | fake-5kb.json](reports/charts/json-dumps-fake-5kb.json.png)
+![dumps | fake-1mb.json](reports/charts/json-dumps-fake-1mb.json.png)
+![dumps | apache.json](reports/charts/json-dumps-apache.json.png)
+![dumps | canada.json](reports/charts/json-dumps-canada.json.png)
+![dumps | ctm.json](reports/charts/json-dumps-ctm.json.png)
+![dumps | github.json](reports/charts/json-dumps-github.json.png)
+![dumps | instruments.json](reports/charts/json-dumps-instruments.json.png)
+![dumps | mesh.json](reports/charts/json-dumps-mesh.json.png)
+![dumps | truenull.json](reports/charts/json-dumps-truenull.json.png)
+![dumps | tweet.json](reports/charts/json-dumps-tweet.json.png)
+![dumps | twitter.json](reports/charts/json-dumps-twitter.json.png)
 
 ## JSON loads
 
-![fake-512b.json](reports/charts/loads-fake-512b.json.png)
-![fake-5kb.json](reports/charts/loads-fake-5kb.json.png)
-![fake-1mb.json](reports/charts/loads-fake-1mb.json.png)
-![apache.json](reports/charts/loads-apache.json.png)
-![canada.json](reports/charts/loads-canada.json.png)
-![ctm.json](reports/charts/loads-ctm.json.png)
-![github.json](reports/charts/loads-github.json.png)
-![instruments.json](reports/charts/loads-instruments.json.png)
-![mesh.json](reports/charts/loads-mesh.json.png)
-![truenull.json](reports/charts/loads-truenull.json.png)
-![tweet.json](reports/charts/loads-tweet.json.png)
-![twitter.json](reports/charts/loads-twitter.json.png)
+![loads | fake-512b.json](reports/charts/json-loads-fake-512b.json.png)
+![loads | fake-5kb.json](reports/charts/json-loads-fake-5kb.json.png)
+![loads | fake-1mb.json](reports/charts/json-loads-fake-1mb.json.png)
+![loads | apache.json](reports/charts/json-loads-apache.json.png)
+![loads | canada.json](reports/charts/json-loads-canada.json.png)
+![loads | ctm.json](reports/charts/json-loads-ctm.json.png)
+![loads | github.json](reports/charts/json-loads-github.json.png)
+![loads | instruments.json](reports/charts/json-loads-instruments.json.png)
+![loads | mesh.json](reports/charts/json-loads-mesh.json.png)
+![loads | truenull.json](reports/charts/json-loads-truenull.json.png)
+![loads | tweet.json](reports/charts/json-loads-tweet.json.png)
+![loads | twitter.json](reports/charts/json-loads-twitter.json.png)
