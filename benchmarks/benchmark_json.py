@@ -82,7 +82,7 @@ def benchmark_dumps():
         Callee('ujson', ujson.dumps),
     ]
     dataset = chain(generate_fake_data(), load_data())
-    report, summary = benchmark(callees, dataset, COUNT_FACTOR)
+    report, summary = benchmark(callees, dataset, count_factor=COUNT_FACTOR)
 
     now = strftime('%Y-%m-%d', gmtime())
     fname = ROOT_PATH / f'reports/json-{op_title}-{now}'
@@ -101,7 +101,7 @@ def benchmark_loads():
         Callee('ujson', ujson.loads),
     ]
     dataset = chain(generate_fake_data(True), load_data(True))
-    report, summary = benchmark(callees, dataset, COUNT_FACTOR)
+    report, summary = benchmark(callees, dataset, count_factor=COUNT_FACTOR)
 
     now = strftime('%Y-%m-%d', gmtime())
     fname = ROOT_PATH / f'reports/json-{op_title}-{now}'

@@ -2,6 +2,7 @@ import statistics
 from collections import defaultdict
 from sys import getsizeof
 from timeit import default_timer
+from types import BuiltinFunctionType, FunctionType, MethodType
 from typing import Any, Iterable, Optional, Tuple, Union
 
 from ._defs import (
@@ -65,11 +66,48 @@ class ByDataSummary:
         return ret
 
 
-def benchmark(callees: Iterable[AnyCallee],
+class NameGenerator:
+
+    def __init__(self):
+        self._i = 1
+        self._name_counters = defaultdict(int)
+
+    def __call__(self, obj: CallableAny):
+        ret = self.scan_name(obj)
+        if not ret:
+            ret = 'callable'
+
+        if ret in self._name_counters:
+            count = self._name_counters[ret] + 1
+            ret = ret + '-' + str(count)
+            self._name_counters[ret] = count
+        else:
+            self._name_counters[ret] = 1
+        return ret
+
+    @classmethod
+    def scan_name(cls, x):
+        ret = None
+        if isinstance(x, (BuiltinFunctionType, FunctionType, MethodType)):
+            ret = str(x)
+            if ret.startswith('<bound method '):
+                ret = ret[14:ret.find(' of <')]  # <bound method [NAME] of <*>>
+            else:
+                ret = ret[10:ret.find(' at ')]  # <function [NAME] at *>
+                if '<lambda>' in ret:
+                    ret = 'lambda'
+            if '<locals>.' in ret:
+                ret = ret[ret.find('<locals>.') + 9:]
+        return ret
+
+
+def benchmark(callees: Iterable[AnyCallee],  # pylint: disable=too-many-branches
               dataset: Iterable[AnyInData],
+              *,
               count_factor=1.0,
               estimator=None,
               summary=None,
+              name_generator=None,
               verbose=True) -> Tuple[Report, Optional[Any]]:
     """
     :param callees:
@@ -77,15 +115,18 @@ def benchmark(callees: Iterable[AnyCallee],
     :param count_factor:
     :param estimator: Default is Estimator()
     :param summary: None, False or summary object, default is ByDataSummary()
+    :param name_generator:
     :param verbose:
     :return:
     """
 
     # pylint: disable=too-many-arguments, too-many-locals
-    if estimator is None:
+    if not estimator:
         estimator = Estimator()
     if summary is None:
         summary = ByDataSummary()
+    if not name_generator:
+        name_generator = NameGenerator()
     ret = {}
 
     for data_name, data, count_of_call in dataset:
@@ -96,7 +137,12 @@ def benchmark(callees: Iterable[AnyCallee],
         if count_of_call <= 0:
             continue
         group = []
-        for callee_name, callee in callees:
+        for callee_data in callees:
+            if not callable(callee_data):
+                callee_name, callee = callee_data
+            else:
+                callee_name, callee = name_generator(callee_data), callee_data
+
             if verbose:
                 print(' -', callee_name)
 

@@ -17,7 +17,7 @@ class InData(NamedTuple):
     count_of_call: int
 
 
-AnyCallee = Union[Callee, Tuple[str, CallableAny]]
+AnyCallee = Union[CallableAny, Callee, Tuple[str, CallableAny]]
 AnyInData = Union[InData, Tuple[str, Any, int]]
 
 
