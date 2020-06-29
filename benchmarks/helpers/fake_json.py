@@ -5,7 +5,7 @@ import sys
 
 from bisect import bisect
 from enum import auto, IntEnum
-from typing import NamedTuple, Iterable, Tuple
+from typing import Any, Dict, Iterable, NamedTuple, Tuple
 
 
 def _chance(value):
@@ -69,7 +69,7 @@ class FakeJsonGenerator:
 
         if approximate_size < 1:
             approximate_size = 1
-        ret = dict()
+        ret = dict()  # type: Dict[Any, Any]
         current_size = 0
         parents = [ret]
         while current_size < approximate_size:
@@ -104,12 +104,12 @@ class FakeJsonGenerator:
                 current_size += 1
 
             elif type_kind == _JsonTypeKind.Object:
-                nested = dict()
+                nested = dict()  # type: ignore
                 add_elemenet_(parent, indent, nested)
                 parents.append(nested)
 
             elif type_kind == _JsonTypeKind.Array:
-                nested = list()
+                nested = list()  # type: ignore
                 add_elemenet_(parent, indent, nested)
                 parents.append(nested)
 

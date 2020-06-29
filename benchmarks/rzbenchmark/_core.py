@@ -4,12 +4,21 @@ from sys import getsizeof
 from timeit import default_timer
 from typing import Any, Iterable, Optional, Tuple, Union
 
-from ._defs import ByDataReport, Callee, InData, Report, ReportItem, Summary, SummaryItem
+from ._defs import (
+    AnyCallee,
+    AnyInData,
+    ByDataReport,
+    CallableAny,
+    Report,
+    ReportItem,
+    Summary,
+    SummaryItem,
+)
 
 
 class Estimator:
 
-    def __call__(self, callee: callable, data: Any, count_of_call: int) -> float:
+    def __call__(self, callee: CallableAny, data: Any, count_of_call: int) -> float:
         with Estimator.Elapsed() as elapsed:
             for _ in range(count_of_call):
                 callee(data)
@@ -56,8 +65,8 @@ class ByDataSummary:
         return ret
 
 
-def benchmark(callees: Iterable[Callee],
-              dataset: Iterable[InData],
+def benchmark(callees: Iterable[AnyCallee],
+              dataset: Iterable[AnyInData],
               count_factor=1.0,
               estimator=None,
               summary=None,

@@ -8,7 +8,7 @@ all:
 	python -m benchmarks.benchmark_json && python -m benchmarks.benchmark_json_charts
 
 check:
-	pylint benchmarks
+	pylint benchmarks && mypy benchmarks
 
 test:
 	pytest --disable-pytest-warnings --cov=benchmarks/rzbenchmark benchmarks/rzbenchmark/tests

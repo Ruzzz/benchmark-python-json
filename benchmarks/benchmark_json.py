@@ -4,7 +4,7 @@ from functools import partial
 from itertools import chain
 from pathlib import Path
 from time import gmtime, strftime
-from typing import Generator
+from typing import Any, Dict, Generator
 
 import hyperjson  # https://github.com/mre/hyperjson
 import orjson  # https://github.com/ijl/orjson
@@ -45,12 +45,12 @@ def load_data(as_string=False) -> Generator[InData, None, None]:
         ('data/twitter.json', 1000)
     ]
     for fname, count in values:
-        fname = ROOT_PATH / fname
-        with open(fname) as f:
+        full_fname: Path = ROOT_PATH / fname
+        with open(full_fname) as f:
             data = f.read()
             if not as_string:
                 data = json.loads(data)
-        yield InData(name=fname.name, data=data, count_of_call=count)
+        yield InData(name=full_fname.name, data=data, count_of_call=count)
 
 
 def save_as_md_table(fname, title: str, report: Report, summary: Summary = None):
@@ -62,7 +62,7 @@ def save_as_md_table(fname, title: str, report: Report, summary: Summary = None)
 
 
 def save_as_json(fname, report: Report, summary: Summary = None):
-    content = {'report': report}
+    content = {'report': report}  # type: Dict[str, Any]
     if summary:
         content['summary'] = summary
 

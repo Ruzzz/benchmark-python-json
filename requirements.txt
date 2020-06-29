@@ -1,5 +1,5 @@
-hyperjson
-orjson
-python-rapidjson
-ujson
-tabulate
+hyperjson>=0.2.4
+orjson>=3.1.2
+python-rapidjson>=0.9.1
+ujson>=3.0.0
+tabulate>=0.8.7
