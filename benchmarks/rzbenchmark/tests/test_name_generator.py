@@ -20,8 +20,10 @@ class _Cls0:
 
 def test_name_generator():
     name_generator = NameGenerator()
-    assert name_generator(lambda x: x) == 'lambda'
-    assert name_generator(lambda x: x) == 'lambda-2'
+
+    prefix = 'benchmarks.rzbenchmark.tests.test_name_generator.'
+    assert name_generator(lambda x: x) == prefix + 'lambda'
+    assert name_generator(lambda x: x) == prefix + 'lambda-2'
 
     def local_fn1():
         pass
@@ -38,12 +40,12 @@ def test_name_generator():
         def static_method():
             pass
 
-    assert name_generator(local_fn1) == 'local_fn1'
-    assert name_generator(LocalCls1.simple_method) == 'LocalCls1.simple_method'
-    assert name_generator(LocalCls1.class_method) == 'LocalCls1.class_method'
-    assert name_generator(LocalCls1.static_method) == 'LocalCls1.static_method'
+    assert name_generator(local_fn1) == prefix + 'local_fn1'
+    assert name_generator(LocalCls1.simple_method) == prefix + 'LocalCls1.simple_method'
+    assert name_generator(LocalCls1.class_method) == prefix + 'LocalCls1.class_method'
+    assert name_generator(LocalCls1.static_method) == prefix + 'LocalCls1.static_method'
 
-    assert name_generator(_fn0) == '_fn0'
-    assert name_generator(_Cls0.simple_method) == '_Cls0.simple_method'
-    assert name_generator(_Cls0.class_method) == '_Cls0.class_method'
-    assert name_generator(_Cls0.static_method) == '_Cls0.static_method'
+    assert name_generator(_fn0) == prefix + '_fn0'
+    assert name_generator(_Cls0.simple_method) == prefix + '_Cls0.simple_method'
+    assert name_generator(_Cls0.class_method) == prefix + '_Cls0.class_method'
+    assert name_generator(_Cls0.static_method) == prefix + '_Cls0.static_method'

@@ -1,9 +1,10 @@
+import re
 import statistics
 from collections import defaultdict
 from sys import getsizeof
 from timeit import default_timer
 from types import BuiltinFunctionType, FunctionType, MethodType
-from typing import Any, Iterable, Optional, Tuple, Union
+from typing import Any, Dict, Iterable, Optional, Tuple, Union
 
 from ._defs import (
     AnyCallee,
@@ -68,11 +69,16 @@ class ByDataSummary:
 
 class NameGenerator:
 
-    def __init__(self):
-        self._i = 1
+    def __init__(self, module_as_prefix=True):
+        self.module_as_prefix = module_as_prefix
         self._name_counters = defaultdict(int)
+        self._cache = {}  # type: Dict[object, str]
 
     def __call__(self, obj: CallableAny):
+        ret = self._cache.get(obj, None)
+        if ret is not None:
+            return ret
+
         ret = self.scan_name(obj)
         if not ret:
             ret = 'callable'
@@ -83,21 +89,42 @@ class NameGenerator:
             self._name_counters[ret] = count
         else:
             self._name_counters[ret] = 1
+
+        self._cache[obj] = ret
         return ret
 
+    _REGEXS = [
+        re.compile('<bound method (.+) of <.*>>'),
+        re.compile('<function (.+) at .*'),
+        re.compile('<built-in function (.+)>'),
+    ]
+
     @classmethod
-    def scan_name(cls, x):
+    def scan_name(cls, x: object):
         ret = None
         if isinstance(x, (BuiltinFunctionType, FunctionType, MethodType)):
             ret = str(x)
-            if ret.startswith('<bound method '):
-                ret = ret[14:ret.find(' of <')]  # <bound method [NAME] of <*>>
-            else:
-                ret = ret[10:ret.find(' at ')]  # <function [NAME] at *>
-                if '<lambda>' in ret:
-                    ret = 'lambda'
+            for regex in cls._REGEXS:
+                m = regex.match(ret)
+                if m:
+                    ret = m[1]
+                    break
+            if '<lambda>' in ret:
+                ret = 'lambda'
             if '<locals>.' in ret:
                 ret = ret[ret.find('<locals>.') + 9:]
+
+        elif hasattr(x, '__name__'):
+            ret = x.__name__  # type: ignore
+
+        if not ret:
+            s = repr(x)
+            if s.startswith('functools'):
+                ret = s[:s.find('(')] + '(..)'
+
+        if ret and hasattr(x, '__module__') and x.__module__:
+            ret = x.__module__ + '.' + ret
+
         return ret
 
 
