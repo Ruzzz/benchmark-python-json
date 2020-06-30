@@ -10,7 +10,4 @@ all:
 check:
 	pylint benchmarks && mypy benchmarks
 
-test:
-	pytest --disable-pytest-warnings --cov=benchmarks/rzbenchmark benchmarks/rzbenchmark/tests
-
 -include Makefile.local

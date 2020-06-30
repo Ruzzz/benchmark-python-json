@@ -10,9 +10,10 @@ import hyperjson  # https://github.com/mre/hyperjson
 import orjson  # https://github.com/ijl/orjson
 import rapidjson  # https://github.com/python-rapidjson/python-rapidjson
 import ujson  # https://github.com/ultrajson/ultrajson
+from penchmark import benchmark, report_as_md_table, Callee, InData, Report, Summary
 
 from .helpers.fake_json import FakeJsonGenerator, JsonTypeWeights
-from .rzbenchmark import benchmark, report_as_md_table, Callee, InData, Report, Summary
+
 
 COUNT_FACTOR = 1
 ROOT_PATH = Path(__file__).resolve().parents[1]
@@ -54,7 +55,8 @@ def load_data(as_string=False) -> Generator[InData, None, None]:
 
 
 def save_as_md_table(fname, title: str, report: Report, summary: Summary = None):
-    content = report_as_md_table(title, report, summary)
+    content = report_as_md_table(report, summary)
+    content = f'## {title}\n\n' + content
 
     Path(fname).parent.mkdir(parents=True, exist_ok=True)
     with open(str(fname) + '.md', 'w') as f:

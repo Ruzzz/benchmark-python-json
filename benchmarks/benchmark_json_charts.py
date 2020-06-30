@@ -1,10 +1,10 @@
 import json
 from pathlib import Path
 
-from .rzbenchmark.charts import save_charts_and_get_markdown
+from penchmark.charts import save_charts_and_get_markdown
 
 ROOT_PATH = Path(__file__).resolve().parents[1]
-REPORT_DATE = '2020-06-28'
+REPORT_DATE = '2020-06-30'
 
 
 markdown_template = '''# Charts
@@ -39,7 +39,7 @@ def main():
         loads_charts_markdown=loads_charts_markdown
     )
 
-    with open(ROOT_PATH / f'charts-{REPORT_DATE}.md', 'w') as f:
+    with open(ROOT_PATH / f'json-charts-{REPORT_DATE}.md', 'w') as f:
         f.write(markdown)
 
 
